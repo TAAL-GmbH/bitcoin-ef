@@ -65,3 +65,5 @@ dist
 coverage
 module
 docs
+
+.history

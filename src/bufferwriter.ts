@@ -24,7 +24,7 @@ interface BufferWriter {
   writeVarintBN: (bn: BN) => BufferWriter;
 
   bufLen: number;
-  bufs: Buffer[];
+  buffers: Buffer[];
 }
 
 const assertBuffer = function(buf: Buffer) {
@@ -41,15 +41,15 @@ const BufferWriter = <BufferWriter>function(this: BufferWriter, obj?: any): Buff
   if (obj) {
     this.set(obj);
   } else {
-    this.bufs = [];
+    this.buffers = [];
   }
 
   return this;
 };
 
 BufferWriter.prototype.set = function (obj: any): BufferWriter {
-  this.bufs = obj.bufs || this.bufs || [];
-  this.bufLen = this.bufs.reduce(function (prev: number, buf: Buffer) {
+  this.buffers = obj.buffers || this.buffers || [];
+  this.bufLen = this.buffers.reduce(function (prev: number, buf: Buffer) {
     return prev + buf.length;
   }, 0);
   return this;
@@ -60,19 +60,19 @@ BufferWriter.prototype.toBuffer = function (): Buffer {
 };
 
 BufferWriter.prototype.concat = function (): Buffer {
-  return Buffer.concat(this.bufs, this.bufLen);
+  return Buffer.concat(this.buffers, this.bufLen);
 };
 
 BufferWriter.prototype.write = function (buf: Buffer): BufferWriter {
   assertBuffer(buf);
-  this.bufs.push(buf);
+  this.buffers.push(buf);
   this.bufLen += buf.length;
   return this;
 };
 
 BufferWriter.prototype.writeReverse = function (buf: Buffer): BufferWriter {
   assertBuffer(buf);
-  this.bufs.push(Buffer.from(buf).reverse());
+  this.buffers.push(Buffer.from(buf).reverse());
   this.bufLen += buf.length;
   return this;
 };

@@ -1,0 +1,16 @@
+{
+  "cSpell.words": [
+    "bitcoinsv",
+    "bufferreader",
+    "bufferwriter",
+    "chainbow",
+    "predocs",
+    "readUInt64BEBN",
+    "readUInt64LEBN",
+    "Siggi",
+    "TAAL-GmbH",
+    "Varint",
+    "writeUInt64BEBN",
+    "writeUInt64LEBN"
+  ]
+}

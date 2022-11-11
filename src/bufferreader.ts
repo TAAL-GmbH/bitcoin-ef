@@ -137,7 +137,7 @@ BufferReader.prototype.readUInt64LEBN = function (): BN {
   // array or string. However, the maximum safe number for a double precision
   // floating point is 2 ^ 52 - 1 (0x1fffffffffffff), thus we can safely use
   // non-floating point numbers less than this amount (52 bits). And in the case
-  // that the number is larger, we can instatiate an instance of BN by passing
+  // that the number is larger, we can instantiate an instance of BN by passing
   // an array from the buffer (slower) and specifying the endianness.
   let bn;
   if (combined <= 0x1fffffffffffff) {
@@ -178,7 +178,7 @@ BufferReader.prototype.readVarLengthBuffer = function (): Buffer {
   const len = this.readVarintNum();
   const buf = this.read(len);
   if (buf.length !== len) {
-    throw new Error('Invalid length while reading varlength buffer. ' +
+    throw new Error('Invalid length while reading var length buffer. ' +
       'Expected to read: ' + len + ' and read ' + buf.length);
   }
   return buf;
