@@ -1,0 +1,16 @@
+{
+  "title": "Bitcoin Extended Format utils",
+  "source": {
+    "includePattern": ".+\\.ts(doc|x)?$",
+    "excludePattern": ".+\\.(test|spec).ts"
+  },
+  "plugins": [
+    "node_modules/better-docs/typescript"
+  ],
+  "tags": {
+    "allowUnknownTags": ["optional"]
+  },
+  "opts": {
+    "template": "node_modules/better-docs"
+  }
+}
