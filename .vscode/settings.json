@@ -4,13 +4,22 @@
     "bufferreader",
     "bufferwriter",
     "chainbow",
+    "icellan",
+    "Mergify",
     "predocs",
     "readUInt64BEBN",
     "readUInt64LEBN",
     "Siggi",
     "TAAL-GmbH",
+    "Teardown",
+    "unmocked",
     "Varint",
     "writeUInt64BEBN",
     "writeUInt64LEBN"
+  ],
+  "cSpell.ignoreWords": [
+    "abcdefghijklmnopsergesrgser",
+    "lcov",
+    "tb80d9g96wddlz7zqg43nhwm0000gp"
   ]
 }

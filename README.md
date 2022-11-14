@@ -21,7 +21,7 @@
 ## What is Bitcoin Extended Format?
 
 The bitcoin transaction format is the most efficient way of sending the information that is needed for a Bitcoin node to
-validate 
+validate
 
 ## Installation
 
@@ -41,7 +41,7 @@ Here's the getting started with the Extended Format
 ```javascript
 import { StandardToExtended, ExtendedToStandard } from '@TAAL-GmbH/bitcoin-ef';
 
-// hex encoded stanard transaction
+// hex encoded standard transaction
 const tx = "..."; // hex or buffer
 // the missing information from the inputs, in the correct order (!)
 const inputs = [
