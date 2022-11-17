@@ -1,4 +1,3 @@
-import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import json from "@rollup/plugin-json";
@@ -39,6 +38,23 @@ export default [
     ],
     plugins: [
       typescript({ tsconfig: "./tsconfig.json", sourceMap: true }),
+      excludeDependenciesFromBundle( { peerDependencies: true } ),
+    ],
+  },
+
+  // cli output
+  {
+    input: "src/cli.ts",
+    output: [
+      {
+        file: 'dist/cli.js',
+        format: "cjs",
+        sourcemap: true,
+        banner: '#!/usr/bin/env node',
+      },
+    ],
+    plugins: [
+      typescript({ tsconfig: "./tsconfig.json", sourceMap: false }),
       excludeDependenciesFromBundle( { peerDependencies: true } ),
     ],
   },

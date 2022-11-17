@@ -35,6 +35,11 @@ or, with yarn
 $ yarn add @TAAL-GmbH/bitcoin-ef
 ```
 
+or, install as a global cli tool
+```bash
+$ npm install -g @TAAL-GmbH/bitcoin-ef
+```
+
 ## Usage
 Here's the getting started with the Extended Format
 
@@ -61,7 +66,33 @@ const extendTransaction = StandardToExtended(tx, inputs);
 const standardTransaction = ExtendedToStandard(extendTransaction);
 ```
 
-<br />
+### On the command line
+After installing the cli tool, you can use it like this:
+
+```bash
+$ bitcoin-ef --help
+```
+
+To convert an extended transaction to a standard transaction:
+
+```bash
+$ bitcoin-ef --to-standard <hex encoded extended transaction>
+```
+
+To convert a standard transaction to an extended transaction, you need to pass the missing information from the inputs, in the correct order (!):
+
+```bash
+$ bitcoin-ef --to-extended <hex encoded standard transaction> <json encoded inputs>
+```
+
+To automatically convert a standard transaction to an extended transaction, using the WhatsOnChain API for lookups.
+This is the default behaviour of the cli tool:
+
+```bash
+$ bitcoin-ef --enrich-standard <hex encoded standard transaction>
+or
+$ bitcoin-ef <hex encoded standard transaction>
+```
 
 ## How can I help?
 All kinds of contributions are welcome :raised_hands:!
