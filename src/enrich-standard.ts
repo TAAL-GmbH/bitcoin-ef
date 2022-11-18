@@ -15,6 +15,7 @@ export const EnrichStandardWOC = async function(tx: Buffer | String): Promise<Bu
   for (let i = 0; i < sizeTxIns; i++) {
     // tx ID
     const txID = reader.read(32)
+
     writer.write(txID);
     // output index
     const outputIndex = reader.readUInt32LE()
@@ -31,7 +32,9 @@ export const EnrichStandardWOC = async function(tx: Buffer | String): Promise<Bu
     //
     // Get the TX from Whatsonchain and add the extended information
     //
-    const wocTx = await fetch(`https://api.whatsonchain.com/v1/bsv/main/tx/hash/${txID.reverse().toString('hex')}`);
+    // we must make a copy of txID, otherwise it will be reversed and written that way by the writer (JS object reference)
+    const txIDHex = Buffer.from(txID).reverse().toString('hex')
+    const wocTx = await fetch(`https://api.whatsonchain.com/v1/bsv/main/tx/hash/${txIDHex}`);
     const wocTxJson: any = await wocTx.json();
 
     // write the satoshis
