@@ -66,6 +66,40 @@ const extendTransaction = StandardToExtended(tx, inputs);
 const standardTransaction = ExtendedToStandard(extendTransaction);
 ```
 
+## Usage with the BSV library
+
+```javascript
+import bsv from 'bsv';
+import '@TAAL-GmbH/bitcoin-ef/bsv';
+
+const tx = new bsv.Transaction()
+  .from(utxo)
+  .to(toAddress, 50000)
+  .fee(150)
+  .change(changeAddress)
+  .sign(privateKey)
+
+const txBuffer = tx.toExtended();
+const txHex = tx.toExtended('hex');
+```
+
+or if you have problems with the above:
+
+```javascript
+import bsv from 'bsv';
+import { BSVToExtended } from '@TAAL-GmbH/bitcoin-ef/bsv';
+
+const tx = new bsv.Transaction()
+  .from(utxo)
+  .to(toAddress, 50000)
+  .fee(150)
+  .change(changeAddress)
+  .sign(privateKey)
+
+const txBuffer = BSVToExtended(tx);
+const txHex = BSVToExtended(tx, 'hex');
+```
+
 ### On the command line
 After installing the cli tool, you can use it like this:
 
