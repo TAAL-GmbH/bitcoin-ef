@@ -1,5 +1,5 @@
 {
-  "name": "@TAAL-GmbH/bitcoin-ef",
+  "name": "bitcoin-ef",
   "version": "0.1.0",
   "description": "TypeScript library for working with the Bitcoin Extended Format",
   "homepage": "https://github.com/TAAL-GmbH/bitcoin-ef",
