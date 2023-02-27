@@ -1,4 +1,4 @@
-import {Transaction} from 'bsv';
+import bsv from 'bsv';
 import {StandardToExtended} from "../standard-to-extended";
 import {PreviousOutputs} from "../interface";
 
@@ -8,7 +8,7 @@ declare module "bsv" {
   }
 }
 
-Transaction.prototype.toExtended = function (format: string = "buffer") {
+bsv.Transaction.prototype.toExtended = function (format: string = "buffer") {
   if (this.inputs.length === 0) {
     throw new Error("transaction must have inputs to use toExtended");
   }
@@ -31,6 +31,6 @@ Transaction.prototype.toExtended = function (format: string = "buffer") {
   return extended;
 }
 
-export const BSVToExtended = (tx: Transaction, format: string = "buffer") => {
+export const BSVToExtended = (tx: bsv.Transaction, format: string = "buffer") => {
   return tx.toExtended(format);
 }

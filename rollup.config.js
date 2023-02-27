@@ -1,22 +1,41 @@
+import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import json from "@rollup/plugin-json";
 import nodePolyfills from 'rollup-plugin-polyfill-node';
 import excludeDependenciesFromBundle from "rollup-plugin-exclude-dependencies-from-bundle";
 import dts from 'rollup-plugin-dts'
-import pkg from "./package.json";
 
 export default [
   // browser-friendly UMD build
   {
     input: "src/index.ts",
     output: {
-      name: "typescriptNpmPackage",
-      file: pkg.browser,
+      name: "bitcoin-ef",
+      file: "dist/typescript-npm-package.umd.js",
       format: "umd",
       sourcemap: true,
     },
     plugins: [
+      commonjs(),
+      json(),
+      typescript({ tsconfig: "./tsconfig.json", sourceMap: true }),
+      nodePolyfills(),
+    ],
+  },
+  {
+    input: "src/bsv/index.ts",
+    output: {
+      name: "bitcoin-ef/bsv",
+      file: "dist/bsv/typescript-npm-package.umd.js",
+      format: "umd",
+      sourcemap: true,
+    },
+    external: ['bsv'],
+    plugins: [
+      resolve({
+        skip: ['bsv']
+      }),
       commonjs(),
       json(),
       typescript({ tsconfig: "./tsconfig.json", sourceMap: true }),
@@ -33,8 +52,19 @@ export default [
   {
     input: "src/index.ts",
     output: [
-      { file: pkg.main, format: "cjs", sourcemap: true },
-      { file: pkg.module, format: "es", sourcemap: true },
+      { file: "dist/typescript-npm-package.cjs.js", format: "cjs", sourcemap: true },
+      { file: "dist/typescript-npm-package.esm.js", format: "es", sourcemap: true },
+    ],
+    plugins: [
+      typescript({ tsconfig: "./tsconfig.json", sourceMap: true }),
+      excludeDependenciesFromBundle( { peerDependencies: true } ),
+    ],
+  },
+  {
+    input: "src/bsv/index.ts",
+    output: [
+      { file: "dist/bsv/typescript-npm-package.cjs.js", format: "cjs", sourcemap: true },
+      { file: "dist/bsv/typescript-npm-package.esm.js", format: "es", sourcemap: true },
     ],
     plugins: [
       typescript({ tsconfig: "./tsconfig.json", sourceMap: true }),

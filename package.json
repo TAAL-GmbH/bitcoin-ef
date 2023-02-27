@@ -26,9 +26,21 @@
       "url": "https://github.com/icellan/"
     }
   ],
-  "main": "dist/typescript-npm-package.cjs.js",
-  "module": "dist/typescript-npm-package.esm.js",
-  "browser": "dist/typescript-npm-package.umd.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/typescript-npm-package.esm.js",
+      "node": "./dist/typescript-npm-package.cjs.js",
+      "require": "./dist/typescript-npm-package.cjs.js",
+      "default": "./dist/typescript-npm-package.umd.js"
+    },
+    "./bsv": {
+      "import": "./dist/bsv/typescript-npm-package.esm.js",
+      "node": "./dist/bsv/typescript-npm-package.cjs.js",
+      "require": "./dist/bsv/typescript-npm-package.cjs.js",
+      "default": "./dist/bsv/typescript-npm-package.umd.js"
+    }
+  },
   "bin": {
     "bitcoin-ef": "./dist/cli.js"
   },
@@ -55,6 +67,7 @@
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^22.0.0",
     "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^8.3.1",
     "@types/bsv": "github:chainbow/bsv-types",
     "@types/jest": "^28.1.0",
