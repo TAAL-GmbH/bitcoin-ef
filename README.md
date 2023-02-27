@@ -8,13 +8,16 @@
 [![Sponsor](https://img.shields.io/badge/sponsor-TAAL-GmbH-181717.svg?logo=github&style=flat&v=2)](https://github.com/sponsors/TAAL-GmbH)
 
 ## Table of Contents
-- [What is Bitcoin Extended Format?](#what-is-bitcoin-ef)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Documentation](#documentation)
-- [Code Standards](#code-standards)
-- [Contributing](#contributing)
-- [License](#license)
+- [Bitcoin Extend Format JavaScript Utils](#bitcoin-extend-format-javascript-utils)
+  - [Table of Contents](#table-of-contents)
+  - [What is Bitcoin Extended Format?](#what-is-bitcoin-extended-format)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Usage with the BSV library](#usage-with-the-bsv-library)
+    - [On the command line](#on-the-command-line)
+  - [How can I help?](#how-can-i-help)
+    - [Contributors ✨](#contributors-)
+  - [License](#license)
 
 <br />
 
@@ -27,17 +30,17 @@ validate
 
 Install the Bitcoin Extended Format library into your project:
 ```bash
-$ npm install @TAAL-GmbH/bitcoin-ef
+$ npm install bitcoin-ef
 ```
 
 or, with yarn
 ```bash
-$ yarn add @TAAL-GmbH/bitcoin-ef
+$ yarn add bitcoin-ef
 ```
 
 or, install as a global cli tool
 ```bash
-$ npm install -g @TAAL-GmbH/bitcoin-ef
+$ npm install -g bitcoin-ef
 ```
 
 ## Usage
@@ -70,7 +73,7 @@ const standardTransaction = ExtendedToStandard(extendTransaction);
 
 ```javascript
 import bsv from 'bsv';
-import '@TAAL-GmbH/bitcoin-ef/bsv';
+import 'bitcoin-ef/bsv';
 
 const tx = new bsv.Transaction()
   .from(utxo)
@@ -87,7 +90,7 @@ or if you have problems with the above:
 
 ```javascript
 import bsv from 'bsv';
-import { BSVToExtended } from '@TAAL-GmbH/bitcoin-ef/bsv';
+import { BSVToExtended } from 'bitcoin-ef/bsv';
 
 const tx = new bsv.Transaction()
   .from(utxo)
@@ -98,6 +101,48 @@ const tx = new bsv.Transaction()
 
 const txBuffer = BSVToExtended(tx);
 const txHex = BSVToExtended(tx, 'hex');
+```
+
+Or using common JS:
+
+```javascript
+const bsv = require('bsv')
+require('bitcoin-ef/bsv')
+
+/*
+const utxo = {
+  txId: '83c6307ba22838e469545db27a193934576e753ff4c0288537cece4a06ad3d87',
+  outputIndex: 0,
+  script: '76a914117af07edf84bcd40950f46a8254f7f78d85243088ac',
+  satoshis: 836486
+}
+
+const child = bsv.HDPrivateKey('xprv....')
+  .deriveChild('m/0/0')
+
+const privateKey = child.privateKey
+console.log(privateKey.toString())
+
+const toAddress = privateKey.toAddress().toString()
+console.log(toAddress)
+
+const tx = new bsv.Transaction()
+  .from(utxo)
+  .change(toAddress)
+  .sign(privateKey)
+*/
+
+// This is the hex of the signed transaction that does NOT contain the previous output script and satoshis.
+const tx = bsv.Transaction('0100000001873dad064acece378528c0f43f756e573439197ab25d5469e43828a27b30c683000000006b483045022100ff923348df29deedf3c08fcb1bb898f7304344931ba131a03f86beae43f67af7022049fff7207c1f1ee0074de743066e4d3c5aa636d6d019187879327c9c9f6b3cbf412102e7cf3fce2bc6bf4b9e8ef59fd2e4df7f79b5fd8d84cc6b05b8cb9066fdd81575ffffffff0126c30c00000000001976a914117af07edf84bcd40950f46a8254f7f78d85243088ac00000000')
+
+// The following code is not necessary if you have created and signed the transaction using the bsv library.
+tx.inputs[0].output = {
+  script: bsv.Script('76a914117af07edf84bcd40950f46a8254f7f78d85243088ac'),
+  satoshis: 836486
+}
+
+console.log(tx.toExtended('hex'))
+
 ```
 
 ### On the command line
