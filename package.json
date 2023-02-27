@@ -30,14 +30,14 @@
   "exports": {
     ".": {
       "import": "./dist/typescript-npm-package.esm.js",
-      "node": "./dist/typescript-npm-package.cjs.js",
-      "require": "./dist/typescript-npm-package.cjs.js",
+      "node": "./dist/typescript-npm-package.cjs",
+      "require": "./dist/typescript-npm-package.cjs",
       "default": "./dist/typescript-npm-package.umd.js"
     },
     "./bsv": {
       "import": "./dist/bsv/typescript-npm-package.esm.js",
-      "node": "./dist/bsv/typescript-npm-package.cjs.js",
-      "require": "./dist/bsv/typescript-npm-package.cjs.js",
+      "node": "./dist/bsv/typescript-npm-package.cjs",
+      "require": "./dist/bsv/typescript-npm-package.cjs",
       "default": "./dist/bsv/typescript-npm-package.umd.js"
     }
   },

@@ -52,7 +52,7 @@ export default [
   {
     input: "src/index.ts",
     output: [
-      { file: "dist/typescript-npm-package.cjs.js", format: "cjs", sourcemap: true },
+      { file: "dist/typescript-npm-package.cjs", format: "cjs", sourcemap: true },
       { file: "dist/typescript-npm-package.esm.js", format: "es", sourcemap: true },
     ],
     plugins: [
@@ -63,7 +63,7 @@ export default [
   {
     input: "src/bsv/index.ts",
     output: [
-      { file: "dist/bsv/typescript-npm-package.cjs.js", format: "cjs", sourcemap: true },
+      { file: "dist/bsv/typescript-npm-package.cjs", format: "cjs", sourcemap: true },
       { file: "dist/bsv/typescript-npm-package.esm.js", format: "es", sourcemap: true },
     ],
     plugins: [
