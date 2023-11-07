@@ -47,7 +47,7 @@ $ npm install -g bitcoin-ef
 Here's the getting started with the Extended Format
 
 ```javascript
-import { StandardToExtended, ExtendedToStandard } from '@bitcoin-ef/bsv';
+import { StandardToExtended, ExtendedToStandard } from 'bitcoin-ef/bsv';
 
 // hex encoded standard transaction
 const tx = "..."; // hex or buffer
