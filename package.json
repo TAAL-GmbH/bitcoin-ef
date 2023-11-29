@@ -1,6 +1,6 @@
 {
   "name": "bitcoin-ef",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "TypeScript library for working with the Bitcoin Extended Format",
   "homepage": "https://github.com/TAAL-GmbH/bitcoin-ef",
   "repository": {
