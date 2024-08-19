@@ -24,7 +24,7 @@
 ## What is Bitcoin Extended Format?
 
 The bitcoin transaction format is the most efficient way of sending the information that is needed for a Bitcoin node to
-validate
+validate. The BIP for this format is [BIP-239](https://github.com/bitcoin-sv/arc/blob/b6296d1f775e7f3568f915e13d8f03bfe8fd3c32/doc/BIP-239.md)
 
 ## Installation
 
@@ -47,18 +47,18 @@ $ npm install -g bitcoin-ef
 Here's the getting started with the Extended Format
 
 ```javascript
-import { StandardToExtended, ExtendedToStandard } from '@TAAL-GmbH/bitcoin-ef';
+import { StandardToExtended, ExtendedToStandard } from 'bitcoin-ef/bsv';
 
 // hex encoded standard transaction
 const tx = "..."; // hex or buffer
 // the missing information from the inputs, in the correct order (!)
 const inputs = [
   {
-    locking_script: "...", // hex or buffer
+    lockingScript: "...", // hex or buffer
     satoshis: 1234
   },
   {
-    locking_script: "...", // hex or buffer
+    lockingScript: "...", // hex or buffer
     satoshis: 5423
   }
 ];
