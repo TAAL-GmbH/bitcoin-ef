@@ -2,6 +2,7 @@ import arg from 'arg';
 import { EnrichStandardWOC } from "./enrich-standard";
 import { ExtendedToStandard } from "./extended-to-standard";
 import { StandardToExtended } from "./standard-to-extended";
+const fs = require('fs');
 
 const args = arg(
   {
@@ -13,14 +14,26 @@ const args = arg(
 );
 
 if (args['--help']) {
-  console.log("Usage: bitcoin-ef --to-standard <hex> | --to-extended <hex> <JSON outpoints string> | [--enrich-standard] <hex>");
+  console.log("Usage: bitcoin-ef --to-standard <hex> | --to-extended <hex> <JSON outpoints string> | [--enrich-standard] <hex> | <@file.hex>");
   process.exit(0);
 }
 
 if (args._.length < 1) {
   console.log("bitcoin-ef needs the tx hex as input");
 } else {
-  const tx = args._[0];
+  let tx = args._[0];
+
+  // Check if tx starts with @ and read the file content if it does
+  if (tx.startsWith('@')) {
+    const filePath = tx.slice(1);
+    if (fs.existsSync(filePath)) {
+      tx = fs.readFileSync(filePath, 'utf8').trim();
+    } else {
+      console.error(`File not found: ${filePath}`);
+      process.exit(1);
+    }
+  }
+
   try {
     if (args['--to-standard']) {
       console.log("\nStandard Transaction:\n" + ExtendedToStandard(tx), "\n");
