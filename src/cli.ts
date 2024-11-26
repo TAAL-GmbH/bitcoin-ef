@@ -10,11 +10,12 @@ const args = arg(
     '--to-standard': Boolean,
     '--to-extended': Boolean,
     '--enrich-standard': Boolean,
+    '--testnet': Boolean,
   },
 );
 
 if (args['--help']) {
-  console.log("Usage: bitcoin-ef --to-standard <hex> | --to-extended <hex> <JSON outpoints string> | [--enrich-standard] <hex> | <@file.hex>");
+  console.log("Usage: bitcoin-ef --to-standard <hex> | --to-extended <hex> <JSON outpoints string> | [--testnet] [--enrich-standard] <hex> | <@file.hex>");
   process.exit(0);
 }
 
@@ -35,6 +36,8 @@ if (args._.length < 1) {
   }
 
   try {
+    const testnet = args['--testnet'] ? true : false; // Convert to boolean
+
     if (args['--to-standard']) {
       console.log("\nStandard Transaction:\n" + ExtendedToStandard(tx), "\n");
     } else if (args['--to-extended']) {
@@ -46,7 +49,7 @@ if (args._.length < 1) {
       }
     } else {
       (async () => {
-        console.log("\nExtended Transaction:\n" + await EnrichStandardWOC(tx), "\n");
+        console.log("\nExtended Transaction:\n" + await EnrichStandardWOC(tx, testnet), "\n");
       })().catch(e => {
         console.error("ERROR:", e.message);
       });

@@ -3,7 +3,7 @@ import fetch from 'cross-fetch';
 
 import { initReaderWriter, writeOutputs } from "./helpers";
 
-export const EnrichStandardWOC = async function(tx: Buffer | String): Promise<Buffer | String> {
+export const EnrichStandardWOC = async function(tx: Buffer | String, testnet: Boolean): Promise<Buffer | String> {
   let { returnBuffer, reader, writer } = initReaderWriter(tx);
 
   const sizeTxIns = reader.readVarintNum();
@@ -34,7 +34,13 @@ export const EnrichStandardWOC = async function(tx: Buffer | String): Promise<Bu
     //
     // we must make a copy of txID, otherwise it will be reversed and written that way by the writer (JS object reference)
     const txIDHex = Buffer.from(txID).reverse().toString('hex')
-    const wocTx = await fetch(`https://api.whatsonchain.com/v1/bsv/main/tx/hash/${txIDHex}`);
+
+    let net = "main"
+    if (testnet) {
+      net = "test"
+    }
+
+    const wocTx = await fetch(`https://api.whatsonchain.com/v1/bsv/${net}/tx/hash/${txIDHex}`);
     const wocTxJson: any = await wocTx.json();
 
     // write the satoshis
